@@ -3,6 +3,8 @@
 namespace Tavares\CartaoDeBeneficios\Infrastructure\Repositories;
 use Tavares\CartaoDeBeneficios\Application\Ports\Output\CartaoRepository;
 use Tavares\CartaoDeBeneficios\Domain\Entities\Cartao;
+use Tavares\CartaoDeBeneficios\Domain\ValueObjects\Money;
+use Tavares\CartaoDeBeneficios\Domain\Enums\StatusCartao;
 use Tavares\CartaoDeBeneficios\Infrastructure\Exceptions\PersistenceFileNotFoundException;
 use Tavares\CartaoDeBeneficios\Infrastructure\Exceptions\CartaoNaoEncontradoException;
 
@@ -26,7 +28,7 @@ class CartaoRepositoryImpl implements CartaoRepository
     {
         foreach ($this->cartoes as $cartao):
             if($cartao->id == $id):
-                
+                return new Cartao($id, new   , StatusCartao $statusCartao);
             endif;
         endforeach;
 
