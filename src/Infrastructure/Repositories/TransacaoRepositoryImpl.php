@@ -25,9 +25,9 @@ Class TransacaoRepositoryImpl implements TransacaoRepository
 
         $data = json_decode(file_get_contents($this->filepath), true);
 
-        if (!is_array($data['transacoes']) || empty($data['transacoes'])) {
+        if (!is_array($data['transacoes']) || empty($data['transacoes'])):
             throw InvalidTransacoesPersistenceException::dataFormatInvalid();
-        }
+        endif;
 
         $this->transacoes = $data['transacoes'];
     }
