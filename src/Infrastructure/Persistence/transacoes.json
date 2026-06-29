@@ -1,0 +1,22 @@
+{
+  "transacoes": [
+    {
+      "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "valor": 15000,
+      "estabelecimento": "Padaria Central",
+      "data": "2026-06-29T14:30:45"
+    },
+    {
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "valor": 8500,
+      "estabelecimento": "Supermercado ABC",
+      "data": "2026-06-29T10:15:30"
+    },
+    {
+      "id": "12345678-1234-1234-1234-123456789012",
+      "valor": 22000,
+      "estabelecimento": "Restaurante XYZ",
+      "data": "2026-06-29T12:45:20"
+    }
+  ]
+}
