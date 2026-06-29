@@ -21,18 +21,22 @@ class Cartao
         //}
     }
 
-    public function comprar(Money $valorDaCompra): void
+    public function comprar(Money $valorDaCompra,string $estabelecimento): void
     {
-        if (!$valorDaCompra->isGreaterThan(new Money(1))) {
+        if (!$valorDaCompra->isGreaterThan(new Money(0))):
             throw InvalidCompraValueException::valorDaCompraPrecisaSuperiorAZero($valorDaCompra->get());
-        }
+        endif;
 
-        if ($valorDaCompra->isGreaterThan($this->saldo)) {
+        if ($valorDaCompra->isGreaterThan($this->saldo)):
             throw SaldoInsuficienteException::paraRealizarCompra($this->saldo, $valorDaCompra);
-        }
+        endif;
 
-        if ($this->statusCartao === StatusCartao::Bloqueado) {
+        if ($this->statusCartao === StatusCartao::Bloqueado):
             throw CartaoBloqueadoParaOperacaoException::naoEhPossivelRealizarOperacao();
-        }
+        endif;
+
+        $this->saldo = $this->saldo->subtract($valorDaCompra);
+
+        //gera transacao
     }
 }
