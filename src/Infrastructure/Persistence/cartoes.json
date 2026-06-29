@@ -1,0 +1,19 @@
+{
+  "cartoes": [
+    {
+      "id": 1,
+      "saldo": 50000,
+      "statusCartao": "ativo"
+    },
+    {
+      "id": 2,
+      "saldo": 100000,
+      "statusCartao": "ativo"
+    },
+    {
+      "id": 3,
+      "saldo": 25000,
+      "statusCartao": "bloqueado"
+    }
+  ]
+}
