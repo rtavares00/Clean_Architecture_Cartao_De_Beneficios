@@ -1,0 +1,14 @@
+{
+    "name": "tavares/cartao_de_beneficios",
+    "autoload": {
+        "psr-4": {
+            "Tavares\\CartaoDeBeneficios\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rodrigo Tavares Ferreira"
+        }
+    ],
+    "require": {}
+}
