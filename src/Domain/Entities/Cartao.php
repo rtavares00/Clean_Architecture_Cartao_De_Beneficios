@@ -16,9 +16,9 @@ class Cartao
         private Money $saldo,
         private StatusCartao $statusCartao
     ) {
-        if ($this->statusCartao === StatusCartao::Bloqueado) {
-            throw CartaoBloqueadoException::cartaoNaoPodeSerBloqueado();
-        }
+        //if ($this->statusCartao === StatusCartao::Bloqueado) {
+        //    throw CartaoBloqueadoException::cartaoNaoPodeSerBloqueado();
+        //}
     }
 
     public function comprar(Money $valorDaCompra): void
