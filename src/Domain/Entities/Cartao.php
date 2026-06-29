@@ -8,6 +8,7 @@ use Tavares\CartaoDeBeneficios\Domain\Exceptions\CartaoBloqueadoException;
 use Tavares\CartaoDeBeneficios\Domain\Exceptions\InvalidCompraValueException;
 use Tavares\CartaoDeBeneficios\Domain\Exceptions\SaldoInsuficienteException;
 use Tavares\CartaoDeBeneficios\Domain\Exceptions\CartaoBloqueadoParaOperacaoException;
+use DateTime;
 
 class Cartao
 {
@@ -21,7 +22,7 @@ class Cartao
         //}
     }
 
-    public function comprar(Money $valorDaCompra,string $estabelecimento): void
+    public function comprar(Money $valorDaCompra,string $estabelecimento):Transacao
     {
         if (!$valorDaCompra->isGreaterThan(new Money(0))):
             throw InvalidCompraValueException::valorDaCompraPrecisaSuperiorAZero($valorDaCompra->get());
@@ -36,7 +37,8 @@ class Cartao
         endif;
 
         $this->saldo = $this->saldo->subtract($valorDaCompra);
-
-        //gera transacao
+        
+        $transacao = new Transacao($valorDaCompra,$estabelecimento,new DateTime(date("Y-m-d")));
+        return $transacao;
     }
 }
