@@ -7,6 +7,7 @@ use Tavares\CartaoDeBeneficios\Domain\ValueObjects\Money;
 use Tavares\CartaoDeBeneficios\Domain\Enums\StatusCartao;
 use Tavares\CartaoDeBeneficios\Infrastructure\Exceptions\PersistenceFileNotFoundException;
 use Tavares\CartaoDeBeneficios\Infrastructure\Exceptions\CartaoNaoEncontradoException;
+use Tavares\CartaoDeBeneficios\Infrastructure\Exceptions\InvalidCartoesPersistenceException;
 
 class CartaoRepositoryImpl implements CartaoRepository
 {
@@ -22,6 +23,11 @@ class CartaoRepositoryImpl implements CartaoRepository
         endif;
 
         $data = json_decode(file_get_contents($this->filepath), true);
+
+        if (!is_array($data['cartoes']) || empty($data['cartoes'])) {
+            throw InvalidCartoesPersistenceException::dataFormatInvalid();
+        }
+
         $this->cartoes = $data['cartoes'];
     }
 
