@@ -36,14 +36,6 @@ Class TransacaoRepositoryImpl implements TransacaoRepository
     {
         foreach ($this->transacoes as $transacao):
             if($transacao['id'] == $id):
-                /*
-                    public function __construct(
-                        //private int $id,
-                        private Money $valor,
-                        private string $estabelecimento,
-                        private DateTime $data
-                    )
-                */
                 $objTransacao = new Transacao( $transacao['id']  ,new Money($transacao['valor']) , $transacao['estabelecimento'] , new DateTime($transacao['data']) );
                 return $objTransacao;
             endif;
