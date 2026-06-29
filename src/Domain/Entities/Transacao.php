@@ -23,9 +23,9 @@ class Transacao
             throw DataTransacaoInvalidaException::deveSerDataDeHoje($data);
         endif;
 
-        if (empty($this->estabelecimento)) {
+        if (empty($this->estabelecimento)):
             throw EstabelecimentoInvalidoException::naoPoderSerNuloOuVazio();
-        }
+        endif;
 
         $this->setId();
     }
