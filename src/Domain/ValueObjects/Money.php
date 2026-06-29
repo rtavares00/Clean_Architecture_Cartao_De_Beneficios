@@ -13,8 +13,19 @@ class Money
         }
     }
 
-    public function equals(Money $cents)
+    public function equals(Money $other):bool
     {
-        
+        return $this->cents === $other->cents;
+    }
+
+    public function isGreaterThan(Money $other):bool
+    {
+        return $this->cents > $other->cents;
+    }
+    */
+
+    public function get():int
+    {
+        return $this->cents;
     }
 }
