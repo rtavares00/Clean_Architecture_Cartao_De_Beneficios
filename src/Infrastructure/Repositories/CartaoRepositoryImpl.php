@@ -24,9 +24,9 @@ class CartaoRepositoryImpl implements CartaoRepository
 
         $data = json_decode(file_get_contents($this->filepath), true);
 
-        if (!is_array($data['cartoes']) || empty($data['cartoes'])) {
+        if (!is_array($data['cartoes']) || empty($data['cartoes'])):
             throw InvalidCartoesPersistenceException::dataFormatInvalid();
-        }
+        endif;
 
         $this->cartoes = $data['cartoes'];
     }
