@@ -13,7 +13,7 @@ class Money
         }
     }
 
-    /*
+    
     public function equals(Money $other):bool
     {
         return $this->cents === $other->cents;
@@ -23,7 +23,7 @@ class Money
     {
         return $this->cents > $other->cents;
     }
-    */
+    
     
 
     public function get():int
