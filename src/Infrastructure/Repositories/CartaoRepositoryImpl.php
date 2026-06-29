@@ -21,14 +21,15 @@ class CartaoRepositoryImpl implements CartaoRepository
             throw PersistenceFileNotFoundException::arquivoNaoEncontrado($this->filepath);
         endif;
 
-        $this->cartoes = json_decode( file_get_contents($this->filepath) );
+        $data = json_decode(file_get_contents($this->filepath), true);
+        $this->cartoes = $data['cartoes'];
     }
 
     public function buscar(int $id):Cartao
     {
         foreach ($this->cartoes as $cartao):
-            if($cartao->id == $id):
-                return new Cartao($id, new   , StatusCartao $statusCartao);
+            if($cartao['id'] == $id):
+                return new Cartao($id, new Money($cartao['saldo']), StatusCartao::from($cartao['statusCartao']));
             endif;
         endforeach;
 
@@ -37,6 +38,16 @@ class CartaoRepositoryImpl implements CartaoRepository
 
     public function salvar(Cartao $cartao):void
     {
+        for($c = 0; $c < count($this->cartoes); $c++)
+        {
+            $card = $this->cartoes[$c];
+            if($card['id'] == $cartao->id()):
+                array_splice($this->cartoes,$c,1);
+            endif;
+        }
 
+        array_push( $this->cartoes, ["id" => $cartao->id() ,"saldo" => $cartao->saldo()->get() , "statusCartao" => $cartao->status()->value ] );
+        
+        file_put_contents($this->filepath, json_encode(['cartoes' => $this->cartoes], JSON_PRETTY_PRINT));
     }
 }
