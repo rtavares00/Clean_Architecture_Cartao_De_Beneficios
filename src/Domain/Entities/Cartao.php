@@ -9,6 +9,7 @@ use Tavares\CartaoDeBeneficios\Domain\Exceptions\InvalidCompraValueException;
 use Tavares\CartaoDeBeneficios\Domain\Exceptions\SaldoInsuficienteException;
 use Tavares\CartaoDeBeneficios\Domain\Exceptions\CartaoBloqueadoParaOperacaoException;
 use DateTime;
+use Ramsey\Uuid\Uuid;
 
 class Cartao
 {
@@ -27,6 +28,11 @@ class Cartao
         return $this->saldo;
     }
 
+    public function status()
+    {
+        return $this->statusCartao;
+    }
+
     public function comprar(Money $valorDaCompra,string $estabelecimento):Transacao
     {
         if (!$valorDaCompra->isGreaterThan(new Money(0))):
@@ -43,7 +49,7 @@ class Cartao
 
         $this->saldo = $this->saldo->subtract($valorDaCompra);
         
-        $transacao = new Transacao($valorDaCompra,$estabelecimento,new DateTime(date("Y-m-d")));
+        $transacao = new Transacao(Uuid::uuid4()->toString(),$valorDaCompra,$estabelecimento,new DateTime(date("Y-m-d")));
         return $transacao;
     }
 }
