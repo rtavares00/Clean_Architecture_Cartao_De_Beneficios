@@ -10,5 +10,7 @@
             "name": "Rodrigo Tavares Ferreira"
         }
     ],
-    "require": {}
+    "require": {
+        "ramsey/uuid": "^4.9"
+    }
 }
