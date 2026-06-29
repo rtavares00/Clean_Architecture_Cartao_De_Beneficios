@@ -22,6 +22,11 @@ class Cartao
         //}
     }
 
+    public function saldo():Money
+    {
+        return $this->saldo;
+    }
+
     public function comprar(Money $valorDaCompra,string $estabelecimento):Transacao
     {
         if (!$valorDaCompra->isGreaterThan(new Money(0))):
