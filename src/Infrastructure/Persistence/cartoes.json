@@ -3,17 +3,17 @@
     {
       "id": 1,
       "saldo": 50000,
-      "statusCartao": "ativo"
+      "statusCartao": "A"
     },
     {
       "id": 2,
       "saldo": 100000,
-      "statusCartao": "ativo"
+      "statusCartao": "A"
     },
     {
       "id": 3,
       "saldo": 25000,
-      "statusCartao": "bloqueado"
+      "statusCartao": "B"
     }
   ]
 }
