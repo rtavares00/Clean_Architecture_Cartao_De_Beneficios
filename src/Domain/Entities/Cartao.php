@@ -8,8 +8,6 @@ use Tavares\CartaoDeBeneficios\Domain\Exceptions\CartaoBloqueadoException;
 use Tavares\CartaoDeBeneficios\Domain\Exceptions\InvalidCompraValueException;
 use Tavares\CartaoDeBeneficios\Domain\Exceptions\SaldoInsuficienteException;
 use Tavares\CartaoDeBeneficios\Domain\Exceptions\CartaoBloqueadoParaOperacaoException;
-use DateTime;
-use Ramsey\Uuid\Uuid;
 
 class Cartao
 {
@@ -40,6 +38,10 @@ class Cartao
 
     public function comprar(Money $valorDaCompra,string $estabelecimento):Transacao
     {
+        if ($valorDaCompra->get() <= 0):
+            throw InvalidCompraValueException::valorDaCompraPrecisaSuperiorAZero($valorDaCompra->get());
+        endif;
+
         if ($valorDaCompra->isGreaterThan($this->saldo)):
             throw SaldoInsuficienteException::paraRealizarCompra($this->saldo, $valorDaCompra);
         endif;
@@ -49,8 +51,7 @@ class Cartao
         endif;
 
         $this->saldo = $this->saldo->subtract($valorDaCompra);
-        
-        $transacao = new Transacao(Uuid::uuid4()->toString(),$valorDaCompra,$estabelecimento,new DateTime(date("Y-m-d")));
-        return $transacao;
+
+        return Transacao::criar($valorDaCompra, $estabelecimento);
     }
 }
