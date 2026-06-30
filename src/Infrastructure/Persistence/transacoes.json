@@ -29,6 +29,18 @@
             "valor": 5000,
             "estabelecimento": "Padaria Central",
             "data": "2026-06-30T00:00:00"
+        },
+        {
+            "id": "b2bc9bf3-4731-4660-ab7b-0e93dcde0de5",
+            "valor": 3000,
+            "estabelecimento": "Restaurante Bom Apetite",
+            "data": "2026-06-30T00:00:00"
+        },
+        {
+            "id": "ffe29abd-6390-42ac-8335-b905c687a1ee",
+            "valor": 5000,
+            "estabelecimento": "Padaria Central",
+            "data": "2026-06-30T00:00:00"
         }
     ]
 }
