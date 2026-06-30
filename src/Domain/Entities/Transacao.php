@@ -2,16 +2,13 @@
 
 namespace Tavares\CartaoDeBeneficios\Domain\Entities;
 
-//use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\Uuid;
 use Tavares\CartaoDeBeneficios\Domain\ValueObjects\Money;
-use Tavares\CartaoDeBeneficios\Domain\Exceptions\DataTransacaoInvalidaException;
 use Tavares\CartaoDeBeneficios\Domain\Exceptions\EstabelecimentoInvalidoException;
 use DateTime;
 
 class Transacao
 {
-    //private string $id;
-
     public function __construct(
         private string $id,
         private Money $valor,
@@ -19,23 +16,20 @@ class Transacao
         private DateTime $data
     )
     {
-        if ($this->data->format('Y-m-d') !== date('Y-m-d')):
-            throw DataTransacaoInvalidaException::deveSerDataDeHoje($data);
-        endif;
-
         if (empty($this->estabelecimento)):
             throw EstabelecimentoInvalidoException::naoPoderSerNuloOuVazio();
         endif;
-
-        //$this->setId();
     }
 
-    /*
-    public function setId($id):void
+    public static function criar(Money $valor, string $estabelecimento): self
     {
-        $this->id = Uuid::uuid4()->toString();
+        return new self(
+            Uuid::uuid4()->toString(),
+            $valor,
+            $estabelecimento,
+            new DateTime()
+        );
     }
-    */
 
     public function id():string
     {
