@@ -2,6 +2,7 @@
 
 namespace Tavares\CartaoDeBeneficios\Application\DTOs;
 use Tavares\CartaoDeBeneficios\Domain\ValueObjects\Money;
+use DateTime;
 final readonly class PurchaseOutputDTO
 {
     public function __construct(
