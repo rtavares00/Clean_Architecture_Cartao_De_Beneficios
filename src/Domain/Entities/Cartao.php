@@ -23,6 +23,11 @@ class Cartao
         //}
     }
 
+    public function id():int
+    {
+        return $this->id;
+    }
+
     public function saldo():Money
     {
         return $this->saldo;
@@ -35,10 +40,6 @@ class Cartao
 
     public function comprar(Money $valorDaCompra,string $estabelecimento):Transacao
     {
-        if (!$valorDaCompra->isGreaterThan(new Money(0))):
-            throw InvalidCompraValueException::valorDaCompraPrecisaSuperiorAZero($valorDaCompra->get());
-        endif;
-
         if ($valorDaCompra->isGreaterThan($this->saldo)):
             throw SaldoInsuficienteException::paraRealizarCompra($this->saldo, $valorDaCompra);
         endif;
