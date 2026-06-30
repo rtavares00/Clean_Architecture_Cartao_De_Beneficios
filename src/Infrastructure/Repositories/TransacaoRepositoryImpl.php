@@ -43,4 +43,16 @@ Class TransacaoRepositoryImpl implements TransacaoRepository
 
         throw TransacaoNaoEncontradaException::comId($id);
     }
+
+    public function salvar(Transacao $transacao):void
+    {
+        array_push($this->transacoes, [
+            "id" => $transacao->id(),
+            "valor" => $transacao->valor()->get(),
+            "estabelecimento" => $transacao->estabelecimento(),
+            "data" => $transacao->data()->format('Y-m-d\TH:i:s')
+        ]);
+
+        file_put_contents($this->filepath, json_encode(['transacoes' => $this->transacoes], JSON_PRETTY_PRINT));
+    }
 }
