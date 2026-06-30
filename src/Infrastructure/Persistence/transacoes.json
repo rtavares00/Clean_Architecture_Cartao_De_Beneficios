@@ -41,6 +41,12 @@
             "valor": 5000,
             "estabelecimento": "Padaria Central",
             "data": "2026-06-30T00:00:00"
+        },
+        {
+            "id": "4341b7e4-cbeb-42ab-9937-57898bd65d37",
+            "valor": 5000,
+            "estabelecimento": "Padaria Central",
+            "data": "2026-06-30T15:09:29"
         }
     ]
 }
