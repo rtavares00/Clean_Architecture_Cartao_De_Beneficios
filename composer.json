@@ -5,6 +5,11 @@
             "Tavares\\CartaoDeBeneficios\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Rodrigo Tavares Ferreira"
@@ -12,5 +17,13 @@
     ],
     "require": {
         "ramsey/uuid": "^4.9"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.8"
     }
 }
