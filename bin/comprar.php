@@ -6,6 +6,7 @@ use Tavares\CartaoDeBeneficios\Infrastructure\Repositories\CartaoRepositoryImpl;
 use Tavares\CartaoDeBeneficios\Infrastructure\Repositories\TransacaoRepositoryImpl;
 use Tavares\CartaoDeBeneficios\Application\UseCases\PurchaseHandler;
 use Tavares\CartaoDeBeneficios\Presentation\Console\ComprarController;
+use Tavares\CartaoDeBeneficios\Presentation\Presenters\ComprarPresenter;
 
 if ($argc < 4):
     echo "Uso: php bin/comprar.php <cartaoId> <valorEmCentavos> <estabelecimento>\n";
@@ -26,9 +27,8 @@ $controller = new ComprarController(
 try {
     $resultado = $controller->comprar($cartaoId, $valorEmCentavos, $estabelecimento);
 
-    echo "Compra realizada com sucesso!\n";
-    echo "Transacao: " . $resultado->idTransacao . "\n";
-    echo "Saldo restante: " . $resultado->saldoCartaoUtilizado->get() . " centavos\n";
+    $presenter = new ComprarPresenter();
+    echo $presenter->format($resultado);
 } catch (\Exception $e) {
     echo "Erro: " . $e->getMessage() . "\n";
     exit(1);
