@@ -6,6 +6,7 @@ use Tavares\CartaoDeBeneficios\Domain\ValueObjects\Money;
 use Tavares\CartaoDeBeneficios\Domain\Enums\StatusCartao;
 use Tavares\CartaoDeBeneficios\Domain\Exceptions\SaldoInsuficienteException;
 use Tavares\CartaoDeBeneficios\Domain\Exceptions\CartaoBloqueadoParaOperacaoException;
+use Tavares\CartaoDeBeneficios\Domain\Exceptions\InvalidCompraValueException;
 
 it('expoe id, saldo e status pelos getters', function () {
     $cartao = new Cartao(7, new Money(5000), StatusCartao::Ativo);
@@ -22,6 +23,21 @@ it('realiza uma compra debitando o saldo e gerando uma Transacao', function () {
 
     expect($transacao)->toBeInstanceOf(Transacao::class);
     expect($cartao->saldo()->get())->toBe(7000);
+});
+
+it('permite comprar o saldo exato, zerando o cartao', function () {
+    $cartao = new Cartao(1, new Money(5000), StatusCartao::Ativo);
+
+    $cartao->comprar(new Money(5000), 'Padaria Central');
+
+    expect($cartao->saldo()->get())->toBe(0);
+});
+
+it('lanca excecao ao comprar com valor zero', function () {
+    $cartao = new Cartao(1, new Money(5000), StatusCartao::Ativo);
+
+    expect(fn () => $cartao->comprar(new Money(0), 'Padaria'))
+        ->toThrow(InvalidCompraValueException::class);
 });
 
 it('lanca excecao ao comprar com saldo insuficiente', function () {
