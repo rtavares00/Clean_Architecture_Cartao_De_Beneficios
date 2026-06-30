@@ -9,12 +9,16 @@ it('cria um Money com valor positivo e expoe o valor via get', function () {
     expect($money->get())->toBe(5000);
 });
 
-it('lanca excecao ao criar Money com valor zero', function () {
-    expect(fn () => new Money(0))->toThrow(InvalidMoneyValueException::class);
+it('aceita o valor zero (saldo zerado e um valor monetario legitimo)', function () {
+    expect((new Money(0))->get())->toBe(0);
 });
 
 it('lanca excecao ao criar Money com valor negativo', function () {
     expect(fn () => new Money(-100))->toThrow(InvalidMoneyValueException::class);
+});
+
+it('permite subtrair ate zerar sem lancar excecao', function () {
+    expect((new Money(100))->subtract(new Money(100))->get())->toBe(0);
 });
 
 it('considera iguais dois Money com o mesmo valor', function () {
