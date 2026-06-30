@@ -41,4 +41,19 @@ class Transacao
     {
         return $this->id;
     }
+
+    public function valor():Money
+    {
+        return $this->valor;
+    }
+
+    public function estabelecimento():string
+    {
+        return $this->estabelecimento;
+    }
+
+    public function data():DateTime
+    {
+        return $this->data;
+    }
 }
