@@ -7,6 +7,7 @@ use Tavares\CartaoDeBeneficios\Infrastructure\Repositories\TransacaoRepositoryIm
 use Tavares\CartaoDeBeneficios\Application\UseCases\PurchaseHandler;
 use Tavares\CartaoDeBeneficios\Presentation\Console\ComprarController;
 use Tavares\CartaoDeBeneficios\Presentation\Presenters\ComprarPresenter;
+use Tavares\CartaoDeBeneficios\Presentation\Presenters\ErroPresenter;
 
 if ($argc < 4):
     echo "Uso: php bin/comprar.php <cartaoId> <valorEmCentavos> <estabelecimento>\n";
@@ -30,6 +31,7 @@ try {
     $presenter = new ComprarPresenter();
     echo $presenter->format($resultado);
 } catch (\Exception $e) {
-    echo "Erro: " . $e->getMessage() . "\n";
+    $erroPresenter = new ErroPresenter();
+    echo $erroPresenter->format($e);
     exit(1);
 }
