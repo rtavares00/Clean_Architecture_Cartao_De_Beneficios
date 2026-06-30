@@ -5,7 +5,7 @@ use Tavares\CartaoDeBeneficios\Domain\Entities\Transacao;
 
 interface TransacaoRepository
 {
-    public function buscar(int $id):Transacao;
+    public function buscar(string $id):Transacao;
 
     public function salvar(Transacao $transacao):void;
 }
