@@ -8,8 +8,8 @@ class Money
 {
     public function __construct(private int $cents)
     {
-        if ($cents <= 0):
-            throw InvalidMoneyValueException::forNegativeOrZeroAmount($cents);
+        if ($cents < 0):
+            throw InvalidMoneyValueException::forNegativeAmount($cents);
         endif;
     }
 
